@@ -25,9 +25,9 @@ module.exports = [{
                 //console.log('GROUP_NAME', GROUP_NAME);
                 console.log('-----------------------------------------------------------------------------------');
                 console.log('request.headers', request.headers);
-                console.log('--------------------');
+                console.log('----------00----------');
                 console.log('request.url', request.url);
-                console.log('--------------------');
+                console.log('----------00----------');
                 console.log('request.info', request.info);
                 console.log('GET shops');
 
