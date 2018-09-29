@@ -17,7 +17,7 @@ module.exports = [{
         console.log('GET:/abc');
     },
     config: {
-        tags: ['api', 'ts-abc'],
+        tags: ['api', 'tests'],
         description: '测试abc',
     },
 }, {
@@ -28,7 +28,7 @@ module.exports = [{
         console.log('POST:/123');
     },
     config: {
-        tags: ['api', 'ts-post-123'],
+        tags: ['api', 'tests'],
         description: 'post-123'
     }
 }];

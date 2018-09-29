@@ -8,6 +8,18 @@
   },
   "author": "xieliuduo",
   "license": "ISC",
+  "keywords": [
+    "javaScript",
+    "Node",
+    "Hapi"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:xieliuduo/hapi-exercise.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xieliuduo/hapi-exercise/issues"
+  },
   "dependencies": {
     "env2": "^2.2.2",
     "hapi": "^16.6.3",
@@ -15,5 +27,11 @@
     "inert": "^4.2.1",
     "package": "^1.0.1",
     "vision": "^4.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "joi": "^13.6.0"
   }
 }
