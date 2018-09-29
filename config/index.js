@@ -4,9 +4,9 @@
 // }
 
 const {
-    env
+	env
 } = process;
 module.exports = {
-    host: env.HOST,
-    port: env.PORT,
-}
+	host: env.HOST,
+	port: env.PORT,
+};

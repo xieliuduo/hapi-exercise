@@ -21,4 +21,15 @@ module.exports = [{
         description: '测试abc',
     },
 
+}, {
+    method: "POST",
+    path: "/123",
+    handler: (request, reply) => {
+        reply("hello 123");
+        console.log("POST:/123");
+    },
+    config: {
+        tags: ["api", "ts-post-123"],
+        description: "post-123"
+    }
 }]
