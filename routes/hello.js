@@ -20,7 +20,6 @@ module.exports = [{
         tags: ['api', 'ts-abc'],
         description: '测试abc',
     },
-
 }, {
     method: 'POST',
     path: '/123',
