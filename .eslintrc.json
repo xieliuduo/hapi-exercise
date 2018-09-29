@@ -10,23 +10,22 @@
         "sourceType": "module"
     },
     "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
+        "indent": [0, 0, {
+            "SwitchCase": 1
+        }],
         "linebreak-style": [
             "error",
             "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
         ],
         "semi": [
             "error",
             "always"
         ],
         "no-console": "off",
-        "no-undef": 1
+        "no-undef": 1,
+        "quotes": [2, "single", {
+            "avoidEscape": true,
+            "allowTemplateLiterals": true
+        }]
     }
 }
