@@ -5,7 +5,15 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.js')[env];
+const configs = require('../config/config.js');
+// const config = require(__dirname + '/../config/config.js')[env];
+// const config = configs[env]
+const config = {
+  ...configs[env],
+  define: {
+    underscored: true, //下划线 方式 createdAt  => created_at
+  },
+};
 const db = {};
 
 let sequelize;

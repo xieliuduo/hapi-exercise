@@ -1,47 +1,82 @@
 const Joi = require('joi');
 const GROUP_NAME = 'shops';
 
-function configObj(GROUP_NAME, des) {
-    let config = {
-        tags: ['api', GROUP_NAME],
-        description: des,
-    };
-    return config;
-}
+const models = require('../models'); //引入 数据库对象
+const {
+  paginationDefine
+} = require('../utils/router-helper');
+
+
 module.exports = [{
-        method: 'GET',
-        path: `/${GROUP_NAME}`,
-        config: {
-            tags: ['api', GROUP_NAME],
-            description: '获取店铺列表',
-            validate: {
-                query: {
-                    limit: Joi.number().integer().min(1).default(10).description('每页的条数目'),
-                    page: Joi.number().integer().min(1).default(1).description('页码数')
-                }
-            }
+    method: 'GET',
+    path: `/${GROUP_NAME}`,
+    config: {
+      tags: ['api', GROUP_NAME],
+      auth: false,
+      description: '获取店铺列表',
+      validate: {
+        query: {
+          ...paginationDefine
+        }
+      }
+    },
+    handler: async (request, reply) => {
+      const {
+        rows: results,
+        count: totalCount
+      } = await models.shops.findAndCountAll({
+        attributes: [
+          'id',
+          'name',
+        ],
+        limit: request.query.limit,
+        offset: (request.query.page - 1) * request.query.limit,
+      });
+      // 开启分页的插件，返回的数据结构里，需要带上 result 与 totalCount 两个字段
+      reply({
+        results,
+        totalCount
+      });
+    }
+
+  },
+  {
+    method: 'GET',
+    path: `/${GROUP_NAME}/{shopId}/goods`, //GROUP_NAME 获取店铺的商品列表
+    config: {
+      tags: ['api', GROUP_NAME],
+      description: '获取店铺的商品列表',
+      validate: {
+        params: {
+          shopId: Joi.string().required().description('店铺的id'),
         },
-        handler: async (request, reply) => {
-                //console.log('GROUP_NAME', GROUP_NAME);
-                console.log('-----------------------------------------------------------------------------------');
-                console.log('request.headers', request.headers);
-                console.log('----------00----------');
-                console.log('request.url', request.url);
-                console.log('----------00----------');
-                console.log('request.info', request.info);
-                console.log('GET shops');
-
-                reply(GROUP_NAME);
-            },
-
+        query: {
+          ...paginationDefine,
+        },
+      },
     },
-    {
-        method: 'GET',
-        path: `/${GROUP_NAME}/{shopId}/goods`, //GROUP_NAME 获取店铺的商品列表
-        config: configObj(GROUP_NAME, '获取店铺的商品列表'),
-        handler: async (request, reply) => {
-                reply();
-            },
-
-    },
+    handler: async (request, reply) => {
+      // 增加带有 where 的条件查询
+      const {
+        rows: results,
+        count: totalCount
+      } = await models.goods.findAndCountAll({
+        // 基于 shop_id 的条件查询
+        where: {
+          shop_id: request.params.shopId,
+        },
+        attributes: [
+          'id',
+          'name',
+        ],
+        limit: request.query.limit,
+        offset: (request.query.page - 1) * request.query.limit,
+      });
+      // 开启分页的插件，返回的数据结构里，需要带上result与totalCount两个字段
+      reply({
+        results,
+        totalCount
+      });
+    }
+  },
 ];

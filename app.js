@@ -8,7 +8,8 @@ const routesShops = require('./routes/shops'); //路由  店铺
 const routesOrders = require('./routes/orders'); //路由 订单
 //引入自定义的 hapi-swagger 插件配置
 const pluginHapiSwagger = require('./plugins/hapi-swagger');
-
+// 分页插件
+const pluginHapiPagination = require('./plugins/hapi-pagination');
 
 
 
@@ -23,7 +24,8 @@ server.connection({
 const init = async () => {
 	await server.register([
 		//为系统使用 hapi-swagger
-		...pluginHapiSwagger
+		...pluginHapiSwagger,
+		pluginHapiPagination
 
 	]);
 	server.route([
