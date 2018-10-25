@@ -6,6 +6,10 @@ const routerHello = require('./routes/hello'); //  路由  hello
 const routesShops = require('./routes/shops'); //路由  店铺
 
 const routesOrders = require('./routes/orders'); //路由 订单
+
+const routesUsers = require('./routes/users'); //用户 
+
+const routesTest = require('./routes/test'); //用户
 //引入自定义的 hapi-swagger 插件配置
 const pluginHapiSwagger = require('./plugins/hapi-swagger');
 // 分页插件
@@ -31,7 +35,9 @@ const init = async () => {
 	server.route([
 		...routerHello,
 		...routesShops,
-		...routesOrders
+		...routesOrders,
+		...routesUsers,
+		...routesTest
 	]);
 
 	//启动服务
