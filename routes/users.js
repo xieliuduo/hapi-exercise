@@ -1,6 +1,9 @@
 // 登录使用 jwt
 const JWT = require('jsonwebtoken'); // 引入 jwt 库
 
+// 引入 header jwt验证
+
+
 const GROUP_NAME = 'users';
 module.exports = [{
     method: 'POST',

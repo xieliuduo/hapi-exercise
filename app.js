@@ -15,7 +15,8 @@ const pluginHapiSwagger = require('./plugins/hapi-swagger');
 // 分页插件
 const pluginHapiPagination = require('./plugins/hapi-pagination');
 
-
+const hapiAuthJWT2 = require('hapi-auth-jwt2');
+const pluginHapiAuthJWT2 = require('./plugins/hapi-auth-jwt2');
 
 const server = new Hapi.Server();
 
@@ -29,9 +30,11 @@ const init = async () => {
 	await server.register([
 		//为系统使用 hapi-swagger
 		...pluginHapiSwagger,
-		pluginHapiPagination
+		pluginHapiPagination,
+		hapiAuthJWT2
 
 	]);
+
 	server.route([
 		...routerHello,
 		...routesShops,
@@ -39,7 +42,7 @@ const init = async () => {
 		...routesUsers,
 		...routesTest
 	]);
-
+	pluginHapiAuthJWT2(server); // 一旦开启 就要加上权限 验证 请求header 加上 auth
 	//启动服务
 	await server.start();
 	console.log(`Server running at ${server.info.uri}`);

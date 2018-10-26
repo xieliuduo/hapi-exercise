@@ -6,6 +6,7 @@ module.exports = [{
         console.log('GET:/testget');
     },
     config: {
+        auth: false, // auth=false 可以忽略 jwt 检验
         tags: ['api', 'mytest'],
         description: '测试testget',
     },

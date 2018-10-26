@@ -53,6 +53,7 @@ module.exports = [{
         query: {
           ...paginationDefine,
         },
+
       },
     },
     handler: async (request, reply) => {
